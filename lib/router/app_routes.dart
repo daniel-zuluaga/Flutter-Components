@@ -12,28 +12,24 @@ class AppRoutes{
   static final menuOptions = <MenuOption>[
     // TODO: borrar home
     MenuOption(route: "home", name: "Home Screen", screen: const HomeScreen(), icon: Icons.home_rounded),
-    MenuOption(route: "listview1", name: "List type 1", screen: const Listview1Screen(), icon: Icons.list_alt),
-    MenuOption(route: "listview2", name: "List type 2", screen: const Listview2Screen(), icon: Icons.list),
-    MenuOption(route: "Alert", name: "Alertas - Alert", screen: const AlertScreen(), icon: Icons.add_alert_outlined),
-    MenuOption(route: "Card", name: "Tarjetas - Cards", screen: const CardScreen(), icon: Icons.credit_card)
-
+    MenuOption(route: 'listview1', name: 'Listview tipo 1', screen: const Listview1Screen(), icon: Icons.list_alt ),
+    MenuOption(route: 'listview2', name: 'Listview tipo 2', screen: const Listview2Screen(), icon: Icons.list ),
+    MenuOption(route: 'alert', name: 'Alertas - Alerts', screen: const AlertScreen(), icon: Icons.add_alert_outlined ),
+    MenuOption(route: 'card', name: 'Tarjetas - Cards', screen: const CardScreen(), icon: Icons.credit_card ),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
 
     Map<String, Widget Function(BuildContext) > appRoutes = {};
+    appRoutes.addAll({ 'home' : ( BuildContext context ) => const HomeScreen() });
+
 
     for (final option in menuOptions) {
-
-    appRoutes.addAll({ option.name :(context) => option.screen});      
-    
+      appRoutes.addAll({ option.route : ( BuildContext context ) => option.screen });
     }
 
     return appRoutes; 
   }
-
-
-
 
 /*
   static Map<String, Widget Function(BuildContext)> routes = {
