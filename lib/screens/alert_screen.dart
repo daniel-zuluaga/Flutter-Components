@@ -89,7 +89,7 @@ class AlertScreen extends StatelessWidget {
             child: Text("Mostrar alerta", style: TextStyle( fontSize: 16 )),
           ),
           // onPressed: () => displayDialogAndroid(context)
-          onPressed: () => !Platform.isAndroid 
+          onPressed: () => Platform.isAndroid 
               ? displayDialogAndroid(context)
               : DisplayDialogIOS(context)
 
