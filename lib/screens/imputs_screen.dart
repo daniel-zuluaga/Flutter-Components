@@ -1,5 +1,8 @@
 
+import 'package:components_flutter_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+
 
 class InputsScreen extends StatelessWidget {
    
@@ -7,6 +10,17 @@ class InputsScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
+
+    final Map<String, String> formValues = {
+      "first_name": "Daniel",
+      "last_name" : "Zuluaga",
+      "email"     : "daniel.zuluaga007@gamil.com",
+      "password"  : "hdsjhbashjdbshb",
+      "role"      : "Admin",
+    };
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Inputs and Forms"),  
@@ -14,46 +28,44 @@ class InputsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            children: [
-              TextFormField(
-                 autofocus: false,
-                 initialValue: "  ",
-                 textCapitalization: TextCapitalization.words,
-                 autocorrect: true,
-                 onChanged: (value) {
-                  print("value:$value");
-                 },
-                 validator: (value) {
-                   if(value == null) return "Este campo es requerido";
-                   return value.length < 12 ? "Minimo de 12 letras" : null;
-                 },
-                 autovalidateMode: AutovalidateMode.onUserInteraction,
-                 decoration: const InputDecoration(
-                  hintText: "Nombre de usuario",
-                  labelText: "Nombre",
-                  helperText: "Solo letras",
-                  // prefixIcon: Icon(Icons.verified_user_outlined),
-                  suffixIcon: Icon(Icons.groups_outlined),
-                  icon: Icon(Icons.assignment_ind_outlined),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.lightGreen
-                    )
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
-                    )
-                  )
-                 ),
+          child: Form(
+            key: myFormKey,
 
-              )
-            ],
+            child: Column(
+              children:  [
+                const CustomInputField(hintText: 'Nombre de usuario', labelText: 'Nombre'),
+                const SizedBox(height: 30),
+                const CustomInputField(labelText: 'Apellido', hintText: 'Apellido del usuario'),
+                const SizedBox(height: 30),
+                const CustomInputField(labelText: 'Correo', hintText: 'Correo del usuario', keyboardType: TextInputType.emailAddress),
+                const SizedBox(height: 30),
+                const CustomInputField(labelText: 'Contraseña', hintText: 'Contraseña del usuario', obscureText: true),
+                const SizedBox(height: 30),
+          
+                ElevatedButton(
+                  child: const SizedBox(
+                    width: double.infinity,
+                    child: Center(
+                      child: Text("Guardar")
+                    ),
+                  ),
+                  onPressed: () {
+                    if(!myFormKey.currentState!.validate()){
+                      return;
+                    }
+                    
+                    //Todo: imprimir valores del formulario 
+                    print(formValues);
+          
+                  }, 
+                )
+          
+              ],
+            ),
           ), 
         ),
       )
     );
   }
 }
+
