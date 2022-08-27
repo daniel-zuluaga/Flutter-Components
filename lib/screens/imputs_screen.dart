@@ -23,7 +23,7 @@ class InputsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Inputs and Forms"),  
+        title: const Text("Inputs and Forms"),  
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -33,15 +33,29 @@ class InputsScreen extends StatelessWidget {
 
             child: Column(
               children:  [
-                const CustomInputField(hintText: 'Nombre de usuario', labelText: 'Nombre'),
+                CustomInputField(hintText: 'Nombre de usuario', labelText: 'Nombre', formProperty: "first_name", formValues: formValues),
                 const SizedBox(height: 30),
-                const CustomInputField(labelText: 'Apellido', hintText: 'Apellido del usuario'),
+                CustomInputField(labelText: 'Apellido', hintText: 'Apellido del usuario', formProperty: "last_name", formValues: formValues),
                 const SizedBox(height: 30),
-                const CustomInputField(labelText: 'Correo', hintText: 'Correo del usuario', keyboardType: TextInputType.emailAddress),
+                CustomInputField(labelText: 'Correo', hintText: 'Correo del usuario', keyboardType: TextInputType.emailAddress, formProperty: "email", formValues: formValues),
                 const SizedBox(height: 30),
-                const CustomInputField(labelText: 'Contraseña', hintText: 'Contraseña del usuario', obscureText: true),
+                CustomInputField(labelText: 'Contraseña', hintText: 'Contraseña del usuario', obscureText: true, formProperty: "password", formValues: formValues),
                 const SizedBox(height: 30),
           
+                DropdownButtonFormField<String>(
+                  items: const [
+                    DropdownMenuItem(value: "Admin", child: Text("Admin")),
+                    DropdownMenuItem(value: "Superuser", child: Text("Superuser")),
+                    DropdownMenuItem(value: "Developer", child: Text("Developer")),
+                    DropdownMenuItem(value: "Jr. Developer", child: Text("Jr. Developer")),
+                    DropdownMenuItem(value: "Profesional", child: Text("Profesional")),
+                  ], 
+                  onChanged: (value) {
+                    print(value);
+                    formValues["role"] = value ?? "Admin";
+                    }
+                ),
+
                 ElevatedButton(
                   child: const SizedBox(
                     width: double.infinity,
@@ -50,7 +64,9 @@ class InputsScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                    FocusScope.of(context).requestFocus( FocusNode() );
                     if(!myFormKey.currentState!.validate()){
+                      print("Formulario no valido");
                       return;
                     }
                     

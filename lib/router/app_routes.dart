@@ -19,6 +19,8 @@ class AppRoutes{
     MenuOption(route: 'avatar', name: 'Circle Avatar', screen: const AvatarScreen(), icon: Icons.supervised_user_circle_rounded ),
     MenuOption(route: 'Animated', name: 'Animated Container', screen: const AnimatedScreen(), icon: Icons.animation_outlined ),
     MenuOption(route: 'Inputs', name: 'Text Inputs', screen: const InputsScreen(), icon: Icons.input_outlined ),
+    MenuOption(route: 'Slider', name: 'Slider Screen', screen: const SliderScreen(), icon: Icons.arrow_circle_up_outlined ),
+    MenuOption(route: 'Listview Builder', name: 'InfiniteScroll & Pull to refresh', screen: const ListviewBuilderScreen(), icon: Icons.query_builder_outlined ),
 
   ];
 
