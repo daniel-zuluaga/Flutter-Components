@@ -2,8 +2,6 @@
 import 'package:components_flutter_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-
-
 class InputsScreen extends StatelessWidget {
    
   const InputsScreen({Key? key}) : super(key: key);
@@ -51,7 +49,6 @@ class InputsScreen extends StatelessWidget {
                     DropdownMenuItem(value: "Profesional", child: Text("Profesional")),
                   ], 
                   onChanged: (value) {
-                    print(value);
                     formValues["role"] = value ?? "Admin";
                     }
                 ),
